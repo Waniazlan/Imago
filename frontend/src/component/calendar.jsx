@@ -3,6 +3,7 @@ import Panel from './Panel'
 import GetEvent from './GetEvent';
 import EventCalendar from './EventCalendar';
 import GoggleLogin from './GoggleLogin';
+import Weather from './Weather';
 
 
 const Calendar = () => {
@@ -57,6 +58,9 @@ const Calendar = () => {
       </div>
      
      <div className='flex-col sm:mx-auto mr-5 '>
+      <div>
+        <Weather />
+      </div>
       <div className="py-4 px-5 mx-auto bg-black bg-opacity-30 rounded-md">
             <div className="text-center mb-4 flex gap-2 justify-between">
                 <button  className="rounded-full p-2 border-solid border-white  border-2 hover:text-black hover:bg-white duration-300  text-white" onClick={() => setShow(!show)} >

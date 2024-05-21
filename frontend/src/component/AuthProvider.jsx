@@ -26,15 +26,16 @@ const AuthProvider = ({ children }) => {
     }
   });
 
+
   const logOut = () => {
     googleLogout()
     setIsLogging(false)
     localStorage.removeItem("token")
   };
 
- // useEffect(() =>{
-  //const token = localStorage.getItem("token");
-   // if(token){
+ //useEffect(() =>{
+ // const token = localStorage.getItem("token");
+  // if(token){
     //setIsLogging(true)
   //}
  //},[])

@@ -19,11 +19,15 @@ const oauth2Client = new google.auth.OAuth2(
     'http://localhost:5173',
    
 )
-app.use(cors({ origin: 'http://localhost:5173',
+app.use(cors({ 
+  origin: ['http://localhost:5173','https://accounts.google.com/',],
   methods:['GET', 'POST','DELETE']
  }));
 
- 
+ app.use((req, res, next) => { 
+  res.setHeader('Cross-origin-Opener-Policy','allow-pop');
+  next();
+});
 
 app.get('/',async(req,res,next) =>{
   res.send({message:'awesome'})
