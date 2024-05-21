@@ -9,13 +9,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-const GOGGLE_CLIENT_ID = '21633126117-m0adi0dqmienhgrd9eierabhklpoi1b3.apps.googleusercontent.com'
-const GOOGLE_CLIENT_SECRET = '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'
-const REFRESH_TOKEN = '1//0gNz4BVB4bVcwCgYIARAAGBASNwF-L9IrNvrqKKomtjlBQXs8I-Z5p2SCpPJigvM__l3rw7iOLh5gKnzuw-ErsGcPgQzppE-DHFU'
+const CLIENT_ID = process.env.GOGGLE_CLIENT_ID
+const CLIENT_SECRET = process.end.GOOGLE_CLIENT_SECRET
+const REFRESH_TOKENN = process.env.REFRESH_TOKEN
 
 const oauth2Client = new google.auth.OAuth2(
-    GOGGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET,
+    CLIENT_ID,
+    CLIENT_SECRET,
     'http://localhost:5173',
    
 )
@@ -41,7 +41,7 @@ app.post('/create-token', async (req, res) => {
 app.post('/create-event', async (req, res,next) => {
   try {
       const {summary,startDateTime,endDateTime} = req.body;
-      oauth2Client.setCredentials({refresh_token:REFRESH_TOKEN},)
+      oauth2Client.setCredentials({refresh_token:REFRESH_TOKENN},)
       const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
       const response = await calendar.events.insert({
         calendarId:'primary',

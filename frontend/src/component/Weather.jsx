@@ -17,7 +17,6 @@ const Weather = () => {
           `https://api.openweathermap.org/data/2.5/weather?q=${CITY},${COUNTRY_CODE}&appid=${API_KEY}&units=metric`
         );
         setWeatherData(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching weather:', error);
       }
