@@ -59,7 +59,7 @@ const Calendar = () => {
      
      <div className='flex-col sm:mx-auto mr-5 '>
       <div>
-        <Weather />
+        
       </div>
       <div className="py-4 px-5 mx-auto bg-black bg-opacity-30 rounded-md">
             <div className="text-center mb-4 flex gap-2 justify-between">
