@@ -9,18 +9,18 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-const CLIENT_ID = process.env.GOGGLE_CLIENT_ID
-const CLIENT_SECRET = process.end.GOOGLE_CLIENT_SECRET
-const REFRESH_TOKENN = process.env.REFRESH_TOKEN
+const GOGGLE_CLIENT_ID = '21633126117-m0adi0dqmienhgrd9eierabhklpoi1b3.apps.googleusercontent.com'
+const GOOGLE_CLIENT_SECRET = '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'
+const REFRESH_TOKEN = '1//0gNz4BVB4bVcwCgYIARAAGBASNwF-L9IrNvrqKKomtjlBQXs8I-Z5p2SCpPJigvM__l3rw7iOLh5gKnzuw-ErsGcPgQzppE-DHFU'
 
 const oauth2Client = new google.auth.OAuth2(
-    CLIENT_ID,
-    CLIENT_SECRET,
-    'http://localhost:5173',
+    GOGGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    'https://ncalendar-react2.vercel.app',
    
 )
 app.use(cors({ 
-  origin: ['http://localhost:5173','https://accounts.google.com/',],
+  origin: ['https://ncalendar-react2.vercel.app','https://accounts.google.com/',],
   methods:['GET', 'POST','DELETE']
  }));
 
@@ -35,13 +35,13 @@ app.get('/',async(req,res,next) =>{
 
 app.post('/create-token', async (req, res) => {
  const {code} = req.body;
- const {tokens} = await oauth2Client.getToken(code)
- console.log(tokens)
+
+ 
 })
 app.post('/create-event', async (req, res,next) => {
   try {
       const {summary,startDateTime,endDateTime} = req.body;
-      oauth2Client.setCredentials({refresh_token:REFRESH_TOKENN},)
+      oauth2Client.setCredentials({refresh_token:REFRESH_TOKEN},)
       const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
       const response = await calendar.events.insert({
         calendarId:'primary',
@@ -65,6 +65,9 @@ app.get('/events', async (req, res) => {
   try {
 
     const { token } = req.query;     
+    if (!validateToken(token)) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
     const {tokens} = await oauth2Client.getToken(token) 
     oauth2Client.setCredentials(tokens);
     const calendar = google.calendar({version: 'v3', auth:oauth2Client});
@@ -77,6 +80,7 @@ app.get('/events', async (req, res) => {
     });
     const events = response.data.items;
     res.json({events})
+   
   } catch (error) {
     console.error('Error retrieving events:', error);
     res.status(500).json({ error: 'Error retrieving events' });
