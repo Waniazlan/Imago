@@ -65,9 +65,6 @@ app.get('/events', async (req, res) => {
   try {
 
     const { token } = req.query;     
-    if (!validateToken(token)) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
     const {tokens} = await oauth2Client.getToken(token) 
     oauth2Client.setCredentials(tokens);
     const calendar = google.calendar({version: 'v3', auth:oauth2Client});
