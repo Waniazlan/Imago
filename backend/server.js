@@ -16,11 +16,11 @@ const REFRESH_TOKEN = '1//0gNz4BVB4bVcwCgYIARAAGBASNwF-L9IrNvrqKKomtjlBQXs8I-Z5p
 const oauth2Client = new google.auth.OAuth2(
     GOGGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
-    'https://ncalendar-react2.vercel.app',
+    'https://ncalendar-react2-qemp.vercel.app',
    
 )
 app.use(cors({ 
-  origin: ['https://ncalendar-react2.vercel.app','https://accounts.google.com/',],
+  origin: ['https://ncalendar-react2-qemp.vercel.app','https://accounts.google.com/',],
   methods:['GET', 'POST','DELETE']
  }));
 
