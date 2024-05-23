@@ -44,7 +44,7 @@ const GetEvent = () => {
   ///const today = new Date().toISOString().split('T')[0];
   const today = new Date().toISOString().slice(0, 10);
   const todayEvents = events.filter(event => event.start.dateTime.includes(today))
-  const upcomingEvents = events.filter(event => !event.start.dateTime.includes(today))
+  const upcomingEvents = events.filter(event => !event.start.dateTime.includes(today)).slice(0,5)
 
   const toggleDeleteButtons = () => {
     setShowDeleteButtons(!showDeleteButtons);
